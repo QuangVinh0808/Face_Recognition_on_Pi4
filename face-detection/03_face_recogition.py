@@ -1,7 +1,7 @@
 import cv2
 import os 
 import numpy as np
-from picamera2 import Picamera2
+#from picamera2 import Picamera2
 
 #Parameters
 id = 0
@@ -15,8 +15,8 @@ face_detector=cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('trainer/trainer.yml')
 # names related to id
-names = ['None', 'Saumit', 'Bikram', 'Junaid']
-
+names = ['None', 'Vinh', 'Bikram', 'Junaid']
+"""
 # Create an instance of the PiCamera2 object
 cam = Picamera2()
 ## Initialize and start realtime video capture
@@ -27,10 +27,16 @@ cam.preview_configuration.controls.FrameRate=30
 cam.preview_configuration.align()
 cam.configure("preview")
 cam.start()
-
+"""
+cam = cv2.VideoCapture("D:\opencv-face-recognition-rpi4-main\Face_Recognition_on_Pi4\Vinh_Test.mp4") #Test thu tren may tinh
 while True:
     # Capture a frame from the camera
-    frame=cam.capture_array()
+    #frame=cam.capture_array()
+
+    ret, frame = cam.read()  #Test thu tren may tinh
+    if not ret:
+        print("Failed to grab frame")
+        break
 
     #Convert fram from BGR to grayscale
     frameGray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -76,5 +82,5 @@ while True:
 
 # Release the camera and close all windows
 print("\n [INFO] Exiting Program and cleaning up stuff")
-cam.stop()
+cam.release()
 cv2.destroyAllWindows()
