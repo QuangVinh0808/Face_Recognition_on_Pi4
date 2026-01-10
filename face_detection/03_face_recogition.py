@@ -37,7 +37,7 @@ cam.start()
 """
 
 pTime = 0
-cam = cv2.VideoCapture(0) #Test thu tren may tinh
+cam = cv2.VideoCapture('Vinh_Test.mp4') #Test thu tren may tinh
 while True:
     # Capture a frame from the camera
     #frame=cam.capture_array()
